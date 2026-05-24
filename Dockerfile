@@ -30,3 +30,18 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
 
 # Install Pi coding agent (https://pi.dev)
 RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+
+# Configure Pi to use Sakana provider (fugu-mini, fugu-ultra) with fugu-mini as default
+COPY pi-models.json /root/.pi/agent/models.json
+COPY pi-settings.json /root/.pi/agent/settings.json
+
+# Configure git credential helper so `hf auth login --add-to-git-credential`
+# can persist the HF token for `git push` against the HuggingFace Hub
+RUN git config --global credential.helper store
+
+# Entrypoint shim: logs into HuggingFace using $RUNPOD_SECRET_hf_token if set,
+# then chains to the base image's nvidia entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["/start.sh"]
