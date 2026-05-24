@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+for var in RUNPOD_SECRET_hf_token RUNPOD_SECRET_kaggle_token RUNPOD_SECRET_sakana_api_key; do
+    if [ -z "${!var:-}" ]; then
+        echo "Error: required environment variable $var is not set or empty" >&2
+        exit 1
+    fi
+done
+
 if [ -n "$RUNPOD_SECRET_hf_token" ]; then
     hf auth login --token "$RUNPOD_SECRET_hf_token" --add-to-git-credential \
         || echo "Warning: hf auth login failed; continuing without HuggingFace login" >&2
