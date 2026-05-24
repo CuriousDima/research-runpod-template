@@ -1,0 +1,64 @@
+{
+  "providers": {
+    "sakana": {
+      "name": "Sakana API",
+      "baseUrl": "https://api.sakana.ai/v1",
+      "api": "openai-completions",
+      "apiKey": "RUNPOD_SECRET_sakana_api_key",
+      "compat": {
+        "supportsStore": false,
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": true,
+        "supportsUsageInStreaming": true,
+        "maxTokensField": "max_tokens",
+        "supportsStrictMode": false
+      },
+      "models": [
+        {
+          "id": "fugu-mini",
+          "name": "Fugu Mini",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "xhigh": null
+          },
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 10000,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "fugu-ultra",
+          "name": "Fugu Ultra",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "xhigh": null
+          },
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 10000,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  }
+}
