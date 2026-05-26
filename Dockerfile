@@ -10,9 +10,13 @@ WORKDIR /app
 
 # Install system dependencies if needed
 RUN apt-get update --yes && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends software-properties-common && \
+    add-apt-repository --yes multiverse && \
+    apt-get update --yes && \
     DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends \
         wget \
         curl \
+        nvtop \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv package manager
